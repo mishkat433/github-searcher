@@ -34,18 +34,18 @@ const display = (data) => {
     else {
         mainDisplay.innerHTML = `
         <div>
-            <div class="flex  justify-between text-center items-center text-white" >
-                <p class="bg-emerald-800 px-5 py-1 rounded-md">Your Id : ${data.id} </p>
-                <p class="bg-pink-500 px-5 py-1 rounded-md">Public Repositories : ${data.public_repos} </p>
-                <p class="bg-orange-500 px-5 py-1 rounded-md">Followers : ${data.followers} </p>
-                <p class="bg-red-500 px-5 py-1 rounded-md ">Following : ${data.following}</p>
-                <p class="bg-lime-500 px-5 py-1 rounded-md"> Start Date : ${data.created_at.slice(0, 10)} </p>
+            <div class="flex flex-col lg:flex-row  justify-between text-center items-center text-white" >
+                <p class="bg-emerald-800 px-5 mb-3 lg:mb-0 py-1 rounded-md">Your Id : ${data.id} </p>
+                <p class="bg-pink-500 px-5 mb-3 lg:mb-0 py-1 rounded-md">Public Repositories : ${data.public_repos} </p>
+                <p class="bg-orange-500 px-5 mb-3 lg:mb-0 py-1 rounded-md">Followers : ${data.followers} </p>
+                <p class="bg-red-500 px-5 mb-3 lg:mb-0 py-1 rounded-md ">Following : ${data.following}</p>
+                <p class="bg-lime-500 px-5 mb-3 lg:mb-0 py-1 rounded-md"> Start Date : ${data.created_at.slice(0, 10)} </p>
             </div>
-            <div class="flex justify-between items-center gap-7 mt-4">
-                <div class=" w-1/2">
-                    <img class="h-72 rounded-md" src="${data.avatar_url}" alt="">
+            <div class="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-7 mt-4">
+                <div class="w-full lg:w-1/2">
+                    <img class="w-full lg:w-4/5 rounded-md" src="${data.avatar_url}" alt="">
                 </div>
-                <div>
+                <div class="text-center lg:text-left">
                     <h1 class="text-3xl font-semibold text-white mb-2">User Name : ${data.name ? data.name : "not found"}</h1>
                     <h2 class="text-2xl font-semibold text-white mb-5">Login Name : ${data.login}</h2>
                     <a href="${data.html_url}" target="blank" class=" bg-green-700 rounded-lg p-2 text-white hover:bg-green-600">Go to yoru
