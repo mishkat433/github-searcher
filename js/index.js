@@ -48,7 +48,7 @@ const display = (data) => {
                 <div class="text-center lg:text-left">
                     <h1 class="text-3xl font-semibold text-white mb-2">User Name : ${data.name ? data.name : "not found"}</h1>
                     <h2 class="text-2xl font-semibold text-white mb-5">Login Name : ${data.login}</h2>
-                    <a href="${data.html_url}" target="blank" class=" bg-green-700 rounded-lg p-2 text-white hover:bg-green-600">Go to yoru
+                    <a href="${data.html_url}" target="blank" class=" bg-green-700 rounded-lg p-2 text-white hover:bg-green-600">Go to your
                         Profile</a>
                 </div>
             </div>
