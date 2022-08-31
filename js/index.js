@@ -39,7 +39,7 @@ const display = (data) => {
                 <p class="bg-pink-500 px-5 py-1 rounded-md">Public Repositories : ${data.public_repos} </p>
                 <p class="bg-orange-500 px-5 py-1 rounded-md">Followers : ${data.followers} </p>
                 <p class="bg-red-500 px-5 py-1 rounded-md ">Following : ${data.following}</p>
-                <p class="bg-orange-500 px-5 py-1 rounded-md"> Start Date : ${data.created_at.slice(0, 10)} </p>
+                <p class="bg-lime-500 px-5 py-1 rounded-md"> Start Date : ${data.created_at.slice(0, 10)} </p>
             </div>
             <div class="flex justify-between items-center gap-7 mt-4">
                 <div class=" w-1/2">
@@ -48,16 +48,25 @@ const display = (data) => {
                 <div>
                     <h1 class="text-3xl font-semibold text-white mb-2">User Name : ${data.name ? data.name : "not found"}</h1>
                     <h2 class="text-2xl font-semibold text-white mb-5">Login Name : ${data.login}</h2>
-                    <a href="${data.html_url}" target="blank" class=" bg-red-500 rounded-lg p-2 text-white hover:bg-red-600">Go to yoru
+                    <a href="${data.html_url}" target="blank" class=" bg-green-700 rounded-lg p-2 text-white hover:bg-green-600">Go to yoru
                         Profile</a>
                 </div>
             </div>
         </div>
         `
     }
-
-
 }
+
+document.getElementById("clear").addEventListener("click", () => {
+    const confirmation = confirm("Do you want to clear this profile?")
+    if (confirmation) {
+        localStorage.clear()
+        const mainDisplay = document.getElementById("display").innerHTML = `
+        <h1 class="text-red-500 text-center font-bold text-3xl">Data Not Found, Please Try Again...</h1>
+        `
+    }
+
+})
 
 loadData(localStorage.getItem("name"));
 
