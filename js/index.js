@@ -30,8 +30,10 @@ const display = (data) => {
         mainDisplay.innerHTML = `
         <h1 class="text-red-500 text-center font-bold text-3xl">Data Not Found, Please Try Again...</h1>
         `
+        document.getElementById("clear").style.display = "none";
     }
     else {
+        document.getElementById("clear").style.display = "block";
         mainDisplay.innerHTML = `
         <div>
             <div class="flex flex-col lg:flex-row  justify-between text-center items-center text-white" >
@@ -57,17 +59,20 @@ const display = (data) => {
     }
 }
 
-document.getElementById("clear").addEventListener("click", () => {
+
+// Clear localStorage
+document.getElementById("clear").addEventListener("click", (e) => {
     const confirmation = confirm("Do you want to clear this profile?")
     if (confirmation) {
         localStorage.clear()
         const mainDisplay = document.getElementById("display").innerHTML = `
         <h1 class="text-red-500 text-center font-bold text-3xl">Data Not Found, Please Try Again...</h1>
         `
+        document.getElementById("clear").style.display = "none";
     }
-
 })
 
 loadData(localStorage.getItem("name"));
+
 
 document.getElementById("date").innerText = new Date().getFullYear();
