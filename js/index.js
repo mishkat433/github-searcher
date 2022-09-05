@@ -1,17 +1,26 @@
 const loadData = async (search) => {
-    const url = `https://api.github.com/users/${search}`;
-    const res = await fetch(url)
-    const data = await res.json()
+    try {
+        const url = `https://api.github.com/users/${search}`;
+        const res = await fetch(url)
+        const data = await res.json()
 
-    display(data);
+        display(data);
+        spinner(true)
+    }
+    catch (err) {
+        console.log(err.message);
+    }
+    finally {
+        spinner(false)
+    }
 }
+
 
 document.getElementById("searchBtn").addEventListener("click", () => {
     const inputValue = document.getElementById("searchInput");
     loadData(inputValue.value);
     localStorage.setItem("name", inputValue.value)
     inputValue.value = '';
-
 })
 document.getElementById("searchInput").addEventListener("keypress", (e) => {
     if (e.key == "Enter") {
@@ -25,7 +34,6 @@ document.getElementById("searchInput").addEventListener("keypress", (e) => {
 
 const display = (data) => {
     const mainDisplay = document.getElementById("display");
-
     if (data.name === null) {
         mainDisplay.innerHTML = `
         <h1 class="text-red-500 text-center font-bold text-3xl">Data Not Found, Please Try Again...</h1>
@@ -45,13 +53,12 @@ const display = (data) => {
             </div>
             <div class="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-7 mt-4">
                 <div class="w-full lg:w-1/2">
-                    <img class="w-full lg:w-4/5 rounded-md" src="${data.avatar_url}" alt="">
+                    <img class="w-full lg:w-4/5 rounded-md" src="${data.avatar_url ? data.avatar_url : spinner(true)}" alt="">
                 </div>
                 <div class="text-center lg:text-left">
                     <h1 class="text-3xl font-semibold text-white mb-2">User Name : ${data.name ? data.name : "not found"}</h1>
                     <h2 class="text-2xl font-semibold text-white mb-5">Login Name : ${data.login}</h2>
-                    <a href="${data.html_url}" target="blank" class=" bg-green-700 rounded-lg p-2 text-white hover:bg-green-600">Go to your
-                        Profile</a>
+                    <a href="${data.html_url}" target="blank" class=" bg-green-700 rounded-lg p-2 text-white hover:bg-green-600">Go ${data.name} Profile</a>
                 </div>
             </div>
         </div>
@@ -76,3 +83,12 @@ loadData(localStorage.getItem("name"));
 
 
 document.getElementById("date").innerText = new Date().getFullYear();
+
+const spinner = (conditin) => {
+    if (conditin) {
+        document.getElementById("spinner").classList.remove("hidden")
+    }
+    else {
+        document.getElementById("spinner").classList.add("hidden")
+    }
+}
